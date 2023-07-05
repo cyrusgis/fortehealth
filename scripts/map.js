@@ -1119,22 +1119,7 @@ $(window).on('load', function() {
 
 });
 
- //set up status layer 
- var opportunityZones = L.esri.featureLayer({
-  url: 'https://services.arcgis.com/VTyQ9soqVukalItT/arcgis/rest/services/Opportunity_Zones/FeatureServer/0',
-  simplifyFactor: 0.5,
-  precision: 5,
-  style: function (feature) {
-    if (feature.properties.STUSAB === "MA") {
-      return { fillOpacity: 0.5};
-    } else if (feature.properties.STUSAB === "MI") {
-      return { fillOpacity: 0.5};
-    } else {
-      return { fillOpacity: 0.5};
-    }
-  }
-  
-}).addTo(map);
+
 
 
 var cities = L.esri.featureLayer({
@@ -1154,39 +1139,3 @@ cities.bindTooltip(function (layer) {
   return L.Util.template(
     cityPopTemplate, layer.feature.properties);
 });
-//group
-// var overlays = {
-//   "Opportunity Zones": opportunityZones,
-//   "Cities": cities,
-// };
-// L.control.layers(baseMaps, overlays, { collapsed: false, position: 'bottomleft' }).addTo(map);
-
-//     //Legend
-//     var breaks = [17, 14, 11, 8, 5, 3, 0];
-//     var labels = ['CA OptIn Status', 'Opt Out', 'Opt In - Med', 'Opt In - Rec', 'Opt In - Rec and Lounge', 'Opt In - Med and Rec', 'Opt In - Med, Rec and Lounge'];
-//     function getColor(d) {
-//       return d >= breaks[0] ? '#' :
-//         d >= breaks[1] ? "#FF0000" :
-//           d >= breaks[2] ? "#9E559C" : 
-//             d >= breaks[3] ? "#0070FF" :
-//               d >= breaks[4] ? "#FFDE3E" :
-//                   d >= breaks[5] ? "#4CE600" :
-//                     "#38A800";
-//     }
-
-//     var legend = L.control({ position: 'bottomright' });
-
-//     legend.onAdd = function (map) {
-//       var div = L.DomUtil.create('div', 'info legend');
-
-//       // loop through items and generate legend items each
-//       for (var i = 0; i < breaks.length; i++) {
-//         div.innerHTML +=
-//           '<i style="background:' + getColor(breaks[i]) + ' "></i> ' +
-//           labels[i] + (breaks ? '' + '<br>' : '');
-//       }
-
-//       return div;
-//     };
-
-//     legend.addTo(map);
