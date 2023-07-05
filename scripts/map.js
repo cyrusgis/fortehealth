@@ -127,7 +127,7 @@ $(window).on('load', function() {
 
       if (point.Latitude !== '' && point.Longitude !== '') {
         var marker = L.marker([point.Latitude, point.Longitude], {icon: icon})
-          .bindTooltip("<b>" + point['Name'] + '</b><br>' +
+          .bindPopup("<b>" + point['Name'] + '</b><br>' +
           (point['Image'] ? ('<img src="' + point['Image'] + '"><br>') : '') +
           point['Description']);
 
@@ -571,7 +571,7 @@ $(window).on('load', function() {
       }
     }
 
-    layer.bindTooltip(info);
+    layer.bindPopup(info);
 
     
     // Add polygon label if needed
@@ -821,7 +821,7 @@ $(window).on('load', function() {
           }).addTo(map);
 
           if (p[index]['Description'] && p[index]['Description'] != '') {
-            line.bindTooltip(p[index]['Description']);
+            line.bindPopup(p[index]['Description']);
           }
 
           polylinesLegend.addOverlay(line,
@@ -1122,20 +1122,20 @@ $(window).on('load', function() {
 
 
 
-// var cities = L.esri.featureLayer({
-//   url: 'https://services1.arcgis.com/hGdibHYSPO59RG1h/ArcGIS/rest/services/L3_TAXPAR_POLY_ASSESS_gdb/FeatureServer/0',
-// minZoom: 15,
-// style: function (feature) {
-//   if (feature.properties.SOURCE === "ASSESS") {
-//     return { fillOpacity: 0.2};
-//   } else {
-//     return { fillOpacity: 0.2};
-//   }
-// }
-// }).addTo(map);
+var cities = L.esri.featureLayer({
+  url: 'https://services1.arcgis.com/hGdibHYSPO59RG1h/ArcGIS/rest/services/L3_TAXPAR_POLY_ASSESS_gdb/FeatureServer/0',
+minZoom: 15,
+style: function (feature) {
+  if (feature.properties.SOURCE === "ASSESS") {
+    return { fillOpacity: 0.2};
+  } else {
+    return { fillOpacity: 0.2};
+  }
+}
+}).addTo(map);
 
-// var cityPopTemplate = '<span style="font-size:14px">Owner: {OWNER1}</span> <br> <br>{SITE_ADDR} <br>{CITY} <br>{ZIP} <br> Massachusetts <br>Land Value: {LAND_VAL} <br>Other Value: {OTHER_VAL} <br> Total Value: {TOTAL_VAL} <br>Lot Size: {LOT_SIZE} {LOT_UNITS} <br> List Date: {LS_DATE} <br> List Price: ${LS_PRICE}';
-// cities.bindTooltip(function (layer) {
-//   return L.Util.template(
-//     cityPopTemplate, layer.feature.properties);
-// });
+var cityPopTemplate = '<span style="font-size:14px">Owner: {OWNER1}</span> <br> <br>{SITE_ADDR} <br>{CITY} <br>{ZIP} <br> Massachusetts <br>Land Value: {LAND_VAL} <br>Other Value: {OTHER_VAL} <br> Total Value: {TOTAL_VAL} <br>Lot Size: {LOT_SIZE} {LOT_UNITS} <br> List Date: {LS_DATE} <br> List Price: ${LS_PRICE}';
+cities.bindTooltip(function (layer) {
+  return L.Util.template(
+    cityPopTemplate, layer.feature.properties);
+});
